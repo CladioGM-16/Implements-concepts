@@ -9,7 +9,7 @@
 std::mutex cout_mutex;
 
 int procesar_pedido(int id) {
-    // Generar una semilla única para cada hilo
+    // Generar una semilla unica para cada hilo
     std::srand(std::time(0) + id + std::hash<std::thread::id>{}(std::this_thread::get_id()));
 
     // tiempo aleatorio
@@ -38,10 +38,10 @@ void pedido_tienda_online(int num_pedidos) {
     std::cout << "Pedidos realizados, puedes seguir con otras tareas mientras se procesan...\n";
     int total_precio = 0;
 
-    // Obtener los resultados de cada pedido asegurando que el ID sea el correcto
+    
     for (auto& pedido : futuros_pedidos) {
-        int id = pedido.first;      // ID real del pedido
-        int precio = pedido.second.get(); // Obtener el precio calculado
+        int id = pedido.first;      
+        int precio = pedido.second.get(); 
 
         {
             std::lock_guard<std::mutex> lock(cout_mutex);
@@ -55,9 +55,9 @@ void pedido_tienda_online(int num_pedidos) {
 }
 
 int main() {
-    std::srand(std::time(0)); // Inicializar la semilla para std::rand()
+    std::srand(std::time(0)); 
 
-    std::cout << "----- FUTURE (Pedido en Tienda Online) -----\n";
+    std::cout << "----- Pedido en Tienda Online -----\n";
 
     int num_pedidos;
     while (true) {
